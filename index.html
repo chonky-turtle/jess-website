@@ -3,50 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Welcome to my Practice Website">
-    <title>My Practice Website</title>
+    <meta name="description" content="Jessica Snead's Portfolio Website">
+    <title>Jessica Snead - Portfolio</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #0fc17a;
-            color: #000000;
+            background-color: #f5f5f5;
+            color: #333;
         }
+
         header {
-            background-color: #016b0f;
-            color: #ffffff;
-            padding: 10px 20px;
-            text-align: center;
-        }
-        main {
-            padding: 20px;
-            text-align: center;
-        }
-        footer {
-            background-color: #003002;
+            background-color: #222;
             color: #fff;
-            padding: 10px 20px;
+            padding: 20px 0;
             text-align: center;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
         }
-        a {
+
+        nav {
+            margin-top: 10px;
+        }
+
+        nav a {
+            color: #fff;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 50px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        section {
+            margin-bottom: 60px;
+        }
+
+        h1, h2 {
+            margin-bottom: 20px;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .project-card a {
             color: #007bff;
             text-decoration: none;
+        }
+
+        footer {
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .social-icons img {
+            width: 30px;
+            margin: 0 10px;
+            vertical-align: middle;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>My Practice Website</h1>
+        <h1>Jessica Snead</h1>
+        <nav>
+            <a href="#about">About Me</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
     </header>
+
     <main>
-        <p>Welcome! This is a website to practice using Github Pages. Enjoy your stay!.</a>.</p>
+        <section id="about">
+            <h2>About Me</h2>
+            <p>Hi! I’m Jessica, a Data Engineer and tech enthusiast. I love turning messy data into actionable insights, building automated workflows, and mentoring learners in coding and robotics. Currently, I’m diving deeper into advanced data engineering, cloud workflows, and interactive dashboards.</p>
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="projects">
+                <div class="project-card">
+                    <h3>ETL Pipeline Demo</h3>
+                    <p>Automated data pipeline using AWS Lambda & S3.</p>
+                    <a href="https://github.com/jessicasnead/etl-pipeline-demo">View Project</a>
+                </div>
+                <div class="project-card">
+                    <h3>Mushroom Identifier</h3>
+                    <p>Interactive Python project inspired by Strange Horticulture.</p>
+                    <a href="https://github.com/jessicasnead/mushroom-identifier">View Project</a>
+                </div>
+                <div class="project-card">
+                    <h3>Data Cleansing Scripts</h3>
+                    <p>Python & SQL scripts for cleaning messy datasets.</p>
+                    <a href="https://github.com/jessicasnead/data-cleansing-scripts">View Project</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>Feel free to reach out or explore my work:</p>
+            <div class="social-icons">
+                <a href="https://www.linkedin.com/in/jessicasnead/">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn"/>
+                </a>
+                <a href="https://github.com/jessicasnead">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub"/>
+                </a>
+                <a href="https://jessicasnead.dev">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/devdotto.svg" alt="Portfolio"/>
+                </a>
+            </div>
+        </section>
     </main>
+
     <footer>
-        <p>&copy; 2024 J Snead. All rights reserved.</p>
+        <p>&copy; 2025 Jessica Snead. All rights reserved.</p>
     </footer>
 </body>
 </html>
