@@ -1,309 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Jessica Snead's Portfolio Website">
-    <title>Jessica Snead - Portfolio</title>
+<meta charset="UTF-8" />
+<title>Fairytopia Stars-Hollow Vibes</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(#fdf3ff, #fde6ff);
+        overflow-x: hidden;
+        font-family: "Didot", serif;
+    }
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    /* ---------------------------
+       SIDE VINES (FULL + FLOWERS)
+       --------------------------- */
+    .vine {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        width: 140px;
+        pointer-events: none;
+        z-index: 10;
+        background-repeat: repeat-y;
+        background-size: contain;
+        opacity: 0.9;
+    }
 
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-            color: #333;
-            overflow-x: hidden;
-        }
+    .vine.left {
+        left: 0;
+        background-image: url('https://i.imgur.com/Tzv0x2Y.png'); /* leafy vine left */
+    }
 
-        header {
-            background-color: #dc77b7;
-            color: #0a0101;
-            padding: 40px 0 60px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
+    .vine.right {
+        right: 0;
+        background-image: url('https://i.imgur.com/Tzv0x2Y.png'); /* leafy vine right */
+        transform: scaleX(-1);
+    }
 
-        nav {
-            margin-top: 10px;
-        }
+    /* ---------------------------
+       FALLING PETALS
+       --------------------------- */
+    @keyframes fall {
+        from { transform: translateY(-10vh) rotate(0deg);}
+        to { transform: translateY(120vh) rotate(360deg);}
+    }
 
-        nav a {
-            color: #0e0202;
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: 500;
-        }
+    .petal {
+        position: fixed;
+        top: -10vh;
+        width: 20px;
+        height: 20px;
+        background-image: url('https://i.imgur.com/Gk1rRrj.png'); /* pretty petal */
+        background-size: cover;
+        animation: fall linear infinite;
+        z-index: 5;
+        opacity: 0.8;
+    }
 
-        nav a:hover {
-            text-decoration: underline;
-        }
+    /* ---------------------------
+       SPARKLES
+       --------------------------- */
+    .sparkle {
+        position: fixed;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        box-shadow: 0 0 8px 4px white;
+        animation: twinkle ease-in-out infinite;
+        opacity: 0.9;
+    }
 
-        main {
-            padding: 50px 20px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
+    @keyframes twinkle {
+        0%, 100% { transform: scale(1); opacity: 0.6; }
+        50% { transform: scale(1.8); opacity: 1; }
+    }
 
-        section {
-            margin-bottom: 60px;
-        }
+    /* ---------------------------
+       GLOWING MUSHROOMS
+       --------------------------- */
+    .mushroom {
+        position: fixed;
+        bottom: 0;
+        width: 50px;
+        height: 50px;
+        background-image: url('https://i.imgur.com/xRhXy9T.png'); /* glowing mushroom */
+        background-size: contain;
+        background-repeat: no-repeat;
+        filter: drop-shadow(0 0 6px #ffb3ff);
+        animation: pulse 4s ease-in-out infinite;
+        z-index: 15;
+    }
 
-        h1, h2 {
-            margin-bottom: 20px;
-        }
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); filter: drop-shadow(0 0 6px #ffadff);}
+        50% { transform: scale(1.1); filter: drop-shadow(0 0 12px #ffd6ff);}
+    }
 
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
+    /* Page content */
+    .content {
+        padding: 80px;
+        max-width: 700px;
+        margin: auto;
+        position: relative;
+        z-index: 50;
+        text-align: center;
+        color: #6b2f82;
+    }
 
-        .project-card {
-            background-color: #088d20;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        }
+    h1 {
+        font-size: 3rem;
+        text-shadow: 0 0 10px #ffd6ff;
+    }
 
-        .project-card a {
-            color: #088d20;
-            text-decoration: none;
-        }
-
-        footer {
-            background-color: #222;
-            color: images/pixie-tree;
-            text-align: center;
-            padding: 30px 20px;
-            position: relative;
-            overflow: visible;
-        }
-
-        .social-icons img {
-            width: 30px;
-            margin: 0 10px;
-            vertical-align: middle;
-        }
-
-        /* === Growing Vine Animation === */
-        #vines-container {
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 200px;
-            height: 220px;
-            pointer-events: none;
-            overflow: visible;
-        }
-
-        .vine {
-            stroke: #3a5f0b;
-            fill: none;
-            stroke-width: 4;
-            stroke-linecap: round;
-            stroke-dasharray: 300;
-            stroke-dashoffset: 300;
-            animation: drawVine 4s ease-out forwards;
-        }
-
-        @keyframes drawVine {
-            from { stroke-dashoffset: 300; }
-            to { stroke-dashoffset: 0; }
-        }
-
-        .flower {
-            opacity: 0;
-            transform-origin: center;
-            animation: bloom 1.2s ease-out forwards;
-        }
-
-        @keyframes bloom {
-            from { transform: scale(0.2); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        /* === Floating Fairy Petals === */
-        .petal {
-            position: fixed;
-            top: -20px;
-            background: rgba(255,182,193,0.9);
-            width: 14px;
-            height: 18px;
-            border-radius: 70% 30% 70% 30%;
-            filter: blur(0.5px);
-            animation: fall linear infinite;
-            pointer-events: none;
-            z-index: 999;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(120vh) translateX(30px) rotate(160deg); opacity: 0; }
-        }
-
-        /* === Sparkles === */
-        .sparkle {
-            position: fixed;
-            width: 4px;
-            height: 4px;
-            background: radial-gradient(circle, #fff, rgba(255,182,193,0.5));
-            border-radius: 50%;
-            opacity: 0;
-            animation: twinkle 2s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 999;
-        }
-
-        @keyframes twinkle {
-            0% { opacity: 0; transform: scale(0.4); }
-            50% { opacity: 1; transform: scale(1.2); }
-            100% { opacity: 0; transform: scale(0.4); }
-        }
-
-        /* === Glowing Mushrooms === */
-        .mushroom-container {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            padding-top: 30px;
-            position: absolute;
-            top: -40px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            pointer-events: none;
-        }
-
-        .mushroom {
-            width: 40px;
-            height: 50px;
-            position: relative;
-            filter: drop-shadow(0 0 6px rgba(170, 140, 255, 0.8));
-            animation: pulse 3s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0% { filter: drop-shadow(0 0 4px rgba(170,140,255,0.6)); }
-            50% { filter: drop-shadow(0 0 12px rgba(200,170,255,1)); }
-            100% { filter: drop-shadow(0 0 4px rgba(170,140,255,0.6)); }
-        }
-    </style>
+</style>
 </head>
-
 <body>
 
-    <!-- === Falling petals + sparkles will be generated by JS === -->
+<div class="vine left"></div>
+<div class="vine right"></div>
 
-    <header>
-        <div id="vines-container">
-            <svg width="200" height="220">
-                <path class="vine"
-                    d="M100 0 
-                       C 110 40, 70 60, 100 100
-                       C 130 140, 80 160, 100 210" />
+<div class="content">
+    <h1>Welcome to Fairytopia ✨</h1>
+    <p>Twinkly, sparkly, mushroom-glowy magical vibes await you.</p>
+</div>
 
-                <circle class="flower" cx="100" cy="100" r="8" fill="#f49ad1" style="animation-delay: 3.5s;"></circle>
-                <circle class="flower" cx="120" cy="150" r="6" fill="#ffe066" style="animation-delay: 4.2s;"></circle>
-            </svg>
-        </div>
+<script>
+/* ---------------------------
+   GENERATE PETALS
+   --------------------------- */
+for (let i = 0; i < 20; i++) {
+    let petal = document.createElement("div");
+    petal.className = "petal";
+    petal.style.left = Math.random() * 100 + "vw";
+    petal.style.animationDuration = 4 + Math.random() * 6 + "s";
+    petal.style.animationDelay = Math.random() * 5 + "s";
+    document.body.appendChild(petal);
+}
 
-        <h1>Jessica Snead</h1>
-        <nav>
-            <a href="#about">About Me</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
+/* ---------------------------
+   GENERATE SPARKLES
+   --------------------------- */
+for (let i = 0; i < 40; i++) {
+    let s = document.createElement("div");
+    s.className = "sparkle";
+    s.style.left = Math.random() * 100 + "vw";
+    s.style.top = Math.random() * 100 + "vh";
+    s.style.animationDuration = 1.5 + Math.random() * 3 + "s";
+    document.body.appendChild(s);
+}
 
-    <main>
-        <section id="about">
-            <h2>About Me</h2>
-            <p>
-                Hi! I’m Jessica Snead!  
-                I am a Technical Instructor of Data Engineering, Cloud Computing, and Data Analytics!
-            </p>
-        </section>
-
-        <section id="projects">
-            <h2>Projects</h2>
-            <div class="projects">
-                <div class="project-card">
-                    <h3>ETL Pipeline Demo</h3>
-                    <p>Automated data pipeline using AWS Lambda & S3.</p>
-                    <a href="https://github.com/jessicasnead/etl-pipeline-demo">View Project</a>
-                </div>
-                <div class="project-card">
-                    <h3>Mushroom Identifier</h3>
-                    <p>Interactive Python project inspired by Strange Horticulture.</p>
-                    <a href="https://github.com/jessicasnead/mushroom-identifier">View Project</a>
-                </div>
-                <div class="project-card">
-                    <h3>Data Cleansing Scripts</h3>
-                    <p>Python & SQL scripts for cleaning messy datasets.</p>
-                    <a href="https://github.com/jessicasnead/data-cleansing-scripts">View Project</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact">
-            <h2>Contact</h2>
-            <p>Feel free to reach out or explore my work:</p>
-            <div class="social-icons">
-                <a href="https://www.linkedin.com/in/jessicasnead/">
-                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn"/>
-                </a>
-                <a href="https://github.com/jessicasnead">
-                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub"/>
-                </a>
-                <a href="https://jessicasnead.dev">
-                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/devdotto.svg" alt="Portfolio"/>
-                </a>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="mushroom-container">
-            <img class="mushroom" src="https://i.imgur.com/Mx7Zq9W.png" alt="mushroom">
-            <img class="mushroom" src="https://i.imgur.com/Mx7Zq9W.png" alt="mushroom">
-            <img class="mushroom" src="https://i.imgur.com/Mx7Zq9W.png" alt="mushroom">
-        </div>
-        <p>&copy; 2025 Jessica Snead. All rights reserved.</p>
-    </footer>
-
-    <script>
-        /* === Generate Falling Petals === */
-        function createPetal() {
-            const petal = document.createElement("div");
-            petal.className = "petal";
-            petal.style.left = Math.random() * 100 + "vw";
-            petal.style.animationDuration = 6 + Math.random() * 5 + "s";
-            petal.style.opacity = Math.random();
-            document.body.appendChild(petal);
-
-            setTimeout(() => petal.remove(), 15000);
-        }
-        setInterval(createPetal, 500);
-
-        /* === Generate Sparkles === */
-        function createSparkle() {
-            const sp = document.createElement("div");
-            sp.className = "sparkle";
-            sp.style.left = Math.random() * 100 + "vw";
-            sp.style.top = Math.random() * 100 + "vh";
-            sp.style.animationDuration = 2 + Math.random() * 2 + "s";
-            document.body.appendChild(sp);
-
-            setTimeout(() => sp.remove(), 4000);
-        }
-        setInterval(createSparkle, 1200);
-    </script>
+/* ---------------------------
+   PLACE GLOWING MUSHROOMS
+   --------------------------- */
+const mushCount = 7;
+for (let i = 0; i < mushCount; i++) {
+    let m = document.createElement("div");
+    m.className = "mushroom";
+    m.style.left = (5 + i * (90 / mushCount)) + "vw";
+    document.body.appendChild(m);
+}
+</script>
 
 </body>
 </html>
