@@ -1,166 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>Fairytopia Stars-Hollow Vibes</title>
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-        background: linear-gradient(#fdf3ff, #fde6ff);
-        overflow-x: hidden;
-        font-family: "Didot", serif;
-    }
-
-    /* ---------------------------
-       SIDE VINES (FULL + FLOWERS)
-       --------------------------- */
-    .vine {
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        width: 140px;
-        pointer-events: none;
-        z-index: 10;
-        background-repeat: repeat-y;
-        background-size: contain;
-        opacity: 0.9;
-    }
-
-    .vine.left {
-        left: 0;
-        background-image: url('https://i.imgur.com/Tzv0x2Y.png'); /* leafy vine left */
-    }
-
-    .vine.right {
-        right: 0;
-        background-image: url('https://i.imgur.com/Tzv0x2Y.png'); /* leafy vine right */
-        transform: scaleX(-1);
-    }
-
-    /* ---------------------------
-       FALLING PETALS
-       --------------------------- */
-    @keyframes fall {
-        from { transform: translateY(-10vh) rotate(0deg);}
-        to { transform: translateY(120vh) rotate(360deg);}
-    }
-
-    .petal {
-        position: fixed;
-        top: -10vh;
-        width: 20px;
-        height: 20px;
-        background-image: url('https://i.imgur.com/Gk1rRrj.png'); /* pretty petal */
-        background-size: cover;
-        animation: fall linear infinite;
-        z-index: 5;
-        opacity: 0.8;
-    }
-
-    /* ---------------------------
-       SPARKLES
-       --------------------------- */
-    .sparkle {
-        position: fixed;
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        box-shadow: 0 0 8px 4px white;
-        animation: twinkle ease-in-out infinite;
-        opacity: 0.9;
-    }
-
-    @keyframes twinkle {
-        0%, 100% { transform: scale(1); opacity: 0.6; }
-        50% { transform: scale(1.8); opacity: 1; }
-    }
-
-    /* ---------------------------
-       GLOWING MUSHROOMS
-       --------------------------- */
-    .mushroom {
-        position: fixed;
-        bottom: 0;
-        width: 50px;
-        height: 50px;
-        background-image: url('https://i.imgur.com/xRhXy9T.png'); /* glowing mushroom */
-        background-size: contain;
-        background-repeat: no-repeat;
-        filter: drop-shadow(0 0 6px #ffb3ff);
-        animation: pulse 4s ease-in-out infinite;
-        z-index: 15;
-    }
-
-    @keyframes pulse {
-        0%, 100% { transform: scale(1); filter: drop-shadow(0 0 6px #ffadff);}
-        50% { transform: scale(1.1); filter: drop-shadow(0 0 12px #ffd6ff);}
-    }
-
-    /* Page content */
-    .content {
-        padding: 80px;
-        max-width: 700px;
-        margin: auto;
-        position: relative;
-        z-index: 50;
-        text-align: center;
-        color: #6b2f82;
-    }
-
-    h1 {
-        font-size: 3rem;
-        text-shadow: 0 0 10px #ffd6ff;
-    }
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jessica Snead | Data Engineering Portfolio</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header>
+        <div class="container">
+            <h1>Jessica Snead</h1>
+            <p>Data Engineer | ETL | SQL | Python | Cloud</p>
+        </div>
+    </header>
 
-<div class="vine left"></div>
-<div class="vine right"></div>
+    <nav>
+        <div class="container">
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
 
-<div class="content">
-    <h1>Welcome to Fairytopia ✨</h1>
-    <p>Twinkly, sparkly, mushroom-glowy magical vibes await you.</p>
-</div>
+    <section id="about" class="container">
+        <h2>About Me</h2>
+        <p>Hello! I'm a data engineering enthusiast focused on building scalable ETL pipelines, managing databases, and leveraging cloud technologies. I enjoy turning raw data into actionable insights and helping teams make data-driven decisions.</p>
+    </section>
 
-<script>
-/* ---------------------------
-   GENERATE PETALS
-   --------------------------- */
-for (let i = 0; i < 20; i++) {
-    let petal = document.createElement("div");
-    petal.className = "petal";
-    petal.style.left = Math.random() * 100 + "vw";
-    petal.style.animationDuration = 4 + Math.random() * 6 + "s";
-    petal.style.animationDelay = Math.random() * 5 + "s";
-    document.body.appendChild(petal);
-}
+    <section id="skills" class="container">
+        <h2>Skills</h2>
+        <ul class="skills-list">
+            <li>SQL (PostgreSQL, MySQL)</li>
+            <li>Python (Pandas, PySpark)</li>
+            <li>ETL & Data Pipelines</li>
+            <li>Cloud: AWS (S3, Lambda, RDS)</li>
+            <li>Docker & Git</li>
+            <li>Data Cleaning & Transformation</li>
+        </ul>
+    </section>
 
-/* ---------------------------
-   GENERATE SPARKLES
-   --------------------------- */
-for (let i = 0; i < 40; i++) {
-    let s = document.createElement("div");
-    s.className = "sparkle";
-    s.style.left = Math.random() * 100 + "vw";
-    s.style.top = Math.random() * 100 + "vh";
-    s.style.animationDuration = 1.5 + Math.random() * 3 + "s";
-    document.body.appendChild(s);
-}
+    <section id="projects" class="container">
+        <h2>Projects</h2>
+        <div class="projects">
+            <div class="project-card">
+                <h3>ETL Pipeline Project</h3>
+                <p>Built a data pipeline ingesting CSVs into a PostgreSQL database and automated cleaning and transformation using Python.</p>
+                <a href="https://github.com/username/etl-pipeline" target="_blank">View on GitHub</a>
+            </div>
+            <div class="project-card">
+                <h3>Cloud Data Warehouse</h3>
+                <p>Implemented a Redshift data warehouse and automated ETL using AWS Lambda and S3.</p>
+                <a href="https://github.com/username/cloud-warehouse" target="_blank">View on GitHub</a>
+            </div>
+        </div>
+    </section>
 
-/* ---------------------------
-   PLACE GLOWING MUSHROOMS
-   --------------------------- */
-const mushCount = 7;
-for (let i = 0; i < mushCount; i++) {
-    let m = document.createElement("div");
-    m.className = "mushroom";
-    m.style.left = (5 + i * (90 / mushCount)) + "vw";
-    document.body.appendChild(m);
-}
-</script>
+    <section id="contact" class="container">
+        <h2>Contact</h2>
+        <p>Feel free to connect with me:</p>
+        <ul class="contact-list">
+            <li>Email: <a href="mailto:jessica.snead@generation.org">jessica@example.com</a></li>
+            <li>GitHub: <a href="https://github.com/username" target="_blank">github.com/username</a></li>
+            <li>LinkedIn: <a href="https://linkedin.com/in/username" target="_blank">linkedin.com/in/username</a></li>
+        </ul>
+    </section>
 
+    <footer>
+        <p>&copy; 2025 Jessica Snead. All rights reserved.</p>
+    </footer>
 </body>
 </html>
